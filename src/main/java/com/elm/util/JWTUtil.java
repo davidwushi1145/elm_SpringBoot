@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.*;
 
 public class JWTUtil {
-    public static final String SING = "88044327";
+    public static final String SING = "114514";
 
     private final Map<String, Object> header = new HashMap<String, Object>();
 
@@ -25,7 +25,7 @@ public class JWTUtil {
      */
     public String getToken(Map<String, String> map) {
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DATE, 7);
+        instance.add(Calendar.MINUTE, 30);
         JWTCreator.Builder builder = JWT.create();
         map.put("id", UUID.randomUUID().toString());
         //原表达为：map.forEach((k,v)->builder.withClaim(k,v));

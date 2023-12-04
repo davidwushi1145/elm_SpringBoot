@@ -3,6 +3,8 @@ package com.elm.controller;
 import com.elm.common.BaseResponse;
 import com.elm.common.ErrorCode;
 import com.elm.common.ResultUtils;
+import com.elm.common.UserSupport;
+import com.elm.model.bo.User;
 import com.elm.service.UserService;
 import com.elm.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserSupport userSupport;
 
 
     /**
@@ -27,10 +30,9 @@ public class UserController {
      * @param userId
      * @param password
      * @return
-     * @throws Exception
      */
     @PostMapping("/login")
-    public BaseResponse<Map<String, String>> getUserByIdByPass(@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
+    public BaseResponse<Map<String, String>> getUserByIdByPass(@RequestParam("userId") String userId, @RequestParam("password") String password) {
         if (StringUtils.isAnyBlank(userId, password)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
@@ -47,10 +49,9 @@ public class UserController {
      *
      * @param userId
      * @return
-     * @throws Exception
      */
     @GetMapping("/{userId}")
-    public BaseResponse<Integer> getUserById(@PathVariable(value = "userId") String userId) throws Exception {
+    public BaseResponse<Integer> getUserById(@PathVariable(value = "userId") String userId) {
         if (StringUtils.isEmpty(userId)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
@@ -62,12 +63,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/info")
+    public BaseResponse<User> getUserInfo() {
+        String userId = userSupport.getCurrentUserId();
+        User user = userService.getUser(userId);
+        return ResultUtils.success(user);
+    }
+
     @PostMapping("/register")
-    public BaseResponse<Integer> saveUser(@RequestParam("userId") String userId,
-                                          @RequestParam("password") String password,
-                                          @RequestParam("userName") String userName,
-                                          @RequestParam("userSex") Integer userSex) throws Exception {
-        System.out.println(userId + password + userName + userSex);
+    public BaseResponse<Integer> saveUser(@RequestBody User user) {
+        String userId = user.getUserId();
+        String password = user.getPassword();
+        String userName = user.getUserName();
+        Integer userSex = user.getUserSex();
         if (StringUtils.isAnyBlank(userId, password, userName) || password == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }

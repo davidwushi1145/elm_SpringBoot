@@ -17,6 +17,9 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select count(*) from user where userId=#{userId}")
     public int getUserById(String userId) throws SQLException;
 
+    @Select("SELECT userId, userImg, userName, userSex FROM user WHERE userId=#{userId}")
+    public User getUser(String userId) throws SQLException;
+
     @Insert("insert into user values(#{userId},#{password},#{userName},#{userSex},null,1,0)")
     public int saveUser(String userId, String password, String userName,Integer userSex) throws SQLException;
 

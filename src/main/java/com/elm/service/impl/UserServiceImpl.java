@@ -57,6 +57,14 @@ public class UserServiceImpl implements UserService {
         return userVo;
     }
 
+    public User getUser(String userId) {
+        try {
+            return userMapper.getUser(userId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public int getUserById(String userId) {
         try {
