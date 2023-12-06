@@ -61,6 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
             OrderDetailet od = new OrderDetailet();
             od.setOrderId(orderId);
             od.setFoodId(c.getFoodId());
+            od.setBusinessId(c.getBusinessId());
             od.setQuantity(c.getQuantity());
             orderDetailetList.add(od);
         }
@@ -132,5 +133,13 @@ public class OrdersServiceImpl implements OrdersService {
             return new ArrayList<>();
         }
         return ordersList.stream().map(this::getOrdersVo).collect(Collectors.toList());
+    }
+
+    public List<OrderDetailet> listOrderDetailetByOrderId(Integer orderId) {
+        try {
+            return orderDetailetMapper.listOrderDetailetByOrderId(orderId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
