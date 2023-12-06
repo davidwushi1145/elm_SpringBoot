@@ -98,12 +98,12 @@ public class DeliveryAddressController {
         }
     }
 
-    @DeleteMapping
-    public BaseResponse<Integer> removeDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
-        if (deliveryAddress.getDaId() == null) {
+    @DeleteMapping("/removed-DA")
+    public BaseResponse<Integer> removeDeliveryAddress(@RequestParam("daId") Integer daId) {
+        if (daId == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
-        Integer result = deliveryAddressService.removeDeliveryAddress(deliveryAddress.getDaId());
+        Integer result = deliveryAddressService.removeDeliveryAddress(daId);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {

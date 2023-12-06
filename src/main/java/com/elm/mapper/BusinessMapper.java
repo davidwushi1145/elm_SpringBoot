@@ -16,6 +16,9 @@ public interface BusinessMapper extends BaseMapper<Business> {
     @Select("select * from business where businessId=#{businessId}")
     public Business getBusinessById(Integer businessId) throws SQLException;
 
+    @Select("select * from business order by businessId")
+    public List<Business> listBusiness() throws SQLException;
+
     @Select("SELECT * FROM business WHERE businessName LIKE CONCAT('%', #{businessName}, '%')")
     List<Business> listBusinessByBusinessName(String businessName) throws SQLException;
 }

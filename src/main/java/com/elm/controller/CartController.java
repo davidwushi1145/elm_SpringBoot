@@ -1,5 +1,6 @@
 package com.elm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.elm.common.BaseResponse;
@@ -24,13 +25,11 @@ public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @GetMapping("/lists")
-    public BaseResponse<List<CartVo>> listCart(@RequestParam("cartId") Integer cartId,
+    public BaseResponse<List<CartVo>> listCart(
                                                @RequestParam("businessId") Integer businessId) {
-        if (cartId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
-        }
+
         String userId = userSupport.getCurrentUserId();
-        List<CartVo> cartVoList = cartService.listCart(cartId, userId, businessId);
+        List<CartVo> cartVoList = cartService.listCart(userId, businessId);
         if (cartVoList != null) {
             return ResultUtils.success(cartVoList);
         } else {
@@ -39,7 +38,7 @@ public class CartController {
     }
 
     @PostMapping("/newCarts")
-    public BaseResponse<Integer> saveCart(@RequestParam("businessId") Integer businessId,
+    public BaseResponse<CartVo> saveCart(@RequestParam("businessId") Integer businessId,
                                           @RequestParam("foodId") Integer foodId) {
         if (businessId == null || foodId == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
@@ -49,7 +48,7 @@ public class CartController {
         logger.debug("Saving cart for userId: {}", userId);
         Integer result = cartService.saveCart(businessId, userId, foodId);
         if (result.equals(1)) {
-            return ResultUtils.success(result);
+            return ResultUtils.success(cartService.getCartVoByID(businessId, foodId, userId));
         } else {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增购物车失败");
         }

@@ -37,7 +37,7 @@ public class OrdersServiceImpl implements OrdersService {
         Cart cart = new Cart();
         cart.setUserId(userId);
         cart.setBusinessId(businessId);
-        List<Cart> cartList = cartMapper.listCart(cart.getCartId(), cart.getUserId(), cart.getBusinessId());
+        List<Cart> cartList = cartMapper.listCart( cart.getUserId(), cart.getBusinessId());
         String orderDate = DateUtil.getTodayString();
 
         Orders orders = new Orders();

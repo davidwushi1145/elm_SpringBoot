@@ -47,6 +47,15 @@ public class BusinessController {
         }
     }
 
+    @GetMapping("/businessLists")
+    public BaseResponse<List<BusinessVo>> listBusiness() {
+        List<BusinessVo> businessVoList = businessService.listBusiness();
+        if (businessVoList != null) {
+            return ResultUtils.success(businessVoList);
+        } else {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取商家列表失败");
+        }
+    }
     @GetMapping("/businessNameLists/{businessName}")
     public BaseResponse<List<BusinessVo>> listBusinessByBusinessName(@PathVariable(value = "businessName", required = false) String businessName) {
         // 此处传入的Name参数可以为空

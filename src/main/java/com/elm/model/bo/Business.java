@@ -15,6 +15,7 @@ public class Business {
     private double starPrice; // 起送费
     private double deliveryPrice; // 配送费
     private String remarks;
+    private int orderQuantity; // 订单数量
 
     @Override
     public String toString() {

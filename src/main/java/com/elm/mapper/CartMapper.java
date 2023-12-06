@@ -7,15 +7,18 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.elm.model.bo.Cart;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface CartMapper extends BaseMapper<Cart> {
-    public List<Cart> listCart(Integer cartId, String userId, Integer businessId);
+    public List<Cart> listCart(String userId, Integer businessId);
 
     @Insert("insert into cart(foodId, businessId, userId, quantity, isDelete) values(#{foodId},#{businessId},#{userId},1,0)")
     public int saveCart(Integer businessId, String userId, Integer foodId) throws SQLException;
 
+    @Select("select * from cart where foodId=#{foodId} and businessId=#{businessId} and userId=#{userId}")
+    public Cart getCartById(Integer foodId, Integer businessId, String userId) throws SQLException;
     @Update("update cart set quantity=#{quantity} where foodId=#{foodId} and businessId=#{businessId} and userId=#{userId}")
     public int updateCart(Integer businessId, Integer foodId, String userId, Integer quantity) throws SQLException;
 

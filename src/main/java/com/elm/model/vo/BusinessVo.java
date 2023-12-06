@@ -13,6 +13,7 @@ public class BusinessVo {
     private double starPrice; // 起送费
     private double deliveryPrice; // 配送费
     private String remarks;
+    private int orderQuantity; // 订单数量
 
     @Override
     public String toString() {
@@ -21,6 +22,7 @@ public class BusinessVo {
                 "\n商家地址：" + this.businessAddress +
                 "\n商家介绍：" + this.businessExplain +
                 "\n起送费：" + this.starPrice +
-                "\n配送费：" + this.deliveryPrice;
+                "\n配送费：" + this.deliveryPrice +
+                "\n订单数量：" + this.orderQuantity;
     }
 }

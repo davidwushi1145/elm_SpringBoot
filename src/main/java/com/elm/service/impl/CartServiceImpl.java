@@ -21,8 +21,8 @@ public class CartServiceImpl implements CartService {
     private CartMapper cartMapper;
 
     @Override
-    public List<CartVo> listCart(Integer cartId, String userId, Integer businessId) {
-        List<Cart> cartList = cartMapper.listCart(cartId, userId, businessId);
+    public List<CartVo> listCart(String userId, Integer businessId) {
+        List<Cart> cartList = cartMapper.listCart(userId, businessId);
         return getCartVo(cartList);
     }
 
@@ -69,5 +69,14 @@ public class CartServiceImpl implements CartService {
             return new ArrayList<>();
         }
         return cartList.stream().map(this::getCartVo).collect(Collectors.toList());
+    }
+
+    public CartVo getCartVoByID(Integer foodId, Integer businessId, String userId) {
+        try {
+            Cart cart = cartMapper.getCartById(businessId,foodId,userId);
+            return getCartVo(cart);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

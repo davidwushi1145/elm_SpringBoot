@@ -60,6 +60,14 @@ public class BusinessServiceImpl implements BusinessService {
         return businessVo;
     }
 
+    public List<BusinessVo> listBusiness() {
+        try {
+            List<Business> businessList = businessMapper.listBusiness();
+            return getBusinessVo(businessList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public List<BusinessVo> getBusinessVo(List<Business> businessList) {
         if (CollectionUtils.isEmpty(businessList)) {

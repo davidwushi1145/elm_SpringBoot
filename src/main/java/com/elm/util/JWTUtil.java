@@ -25,7 +25,7 @@ public class JWTUtil {
      */
     public String getToken(Map<String, String> map) {
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.MINUTE, 30);
+        instance.add(Calendar.MINUTE, 300);
         JWTCreator.Builder builder = JWT.create();
         map.put("id", UUID.randomUUID().toString());
         //原表达为：map.forEach((k,v)->builder.withClaim(k,v));
