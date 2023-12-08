@@ -3,7 +3,7 @@
 ## 项目简介
 
 elm_springboot是一个基于Spring Boot的Web应用程序，设计用于处理业务订单、购物车、用户管理等功能。项目利用了多种技术，如JWT用于身份验证、MyBatis Plus用于ORM、以及Spring Boot用于Web服务。
-
+[前端项目](https://github.com/davidwushi1145/elm_vue)
 ## 技术栈
 
 - **Spring Boot**: 项目使用 Spring Boot 2.7.5，它简化了基于 Spring 的应用程序的配置和部署。
