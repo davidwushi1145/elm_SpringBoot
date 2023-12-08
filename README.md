@@ -70,8 +70,9 @@ elm_springboot是一个基于Spring Boot的Web应用程序，设计用于处理�
 1. 克隆仓库：
 
    ```bash
-   git clone 
-   cd elmboot
+   git clone
+   
+   cd elm_springboot
    ```
 
 2. 使用 Maven 构建项目：
