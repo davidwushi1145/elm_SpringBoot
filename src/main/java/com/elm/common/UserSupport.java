@@ -11,7 +11,8 @@ public class UserSupport {
     public String getCurrentUserId(){
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         String token = requestAttributes.getRequest().getHeader("token");
-        String userId = JWTUtil.verify(token);
+        JWTUtil jwtUtil = new JWTUtil();
+        String userId = jwtUtil.verify(token);
         if(userId==null){
             throw new ConditionException("非法用户！");
         }

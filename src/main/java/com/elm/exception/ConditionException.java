@@ -1,5 +1,10 @@
 package com.elm.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class ConditionException extends RuntimeException {
     public static final long serialVersionUID = 1L;
 
@@ -15,11 +20,4 @@ public class ConditionException extends RuntimeException {
         code = "500";
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }

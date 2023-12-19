@@ -7,6 +7,7 @@ import com.elm.common.UserSupport;
 import com.elm.model.bo.User;
 import com.elm.service.UserService;
 import com.elm.exception.BusinessException;
+import com.elm.util.RSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.apache.commons.lang3.StringUtils;
@@ -88,5 +89,11 @@ public class UserController {
         } else {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增用户失败");
         }
+    }
+
+    @GetMapping("/rsa-pks")
+    public BaseResponse<String> getRsaPublicKey() {
+        String publicKeyStr = RSAUtil.getPublicKeyStr();
+        return ResultUtils.success(publicKeyStr);
     }
 }

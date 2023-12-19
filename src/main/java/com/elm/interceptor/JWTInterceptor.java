@@ -19,6 +19,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         //获取请求头中的令牌
         String token = request.getHeader("token");
         Map<String, Object> map = new HashMap<>();
+        JWTUtil jwtUtil = new JWTUtil();
         if (token == null || token.isEmpty()) {
             map.put("state", false);
             map.put("msg", "未提供Token或Token为空");
@@ -26,7 +27,7 @@ public class JWTInterceptor implements HandlerInterceptor {
             return false;
         }
         try {
-            JWTUtil.verify(token); // 验证Token
+            jwtUtil.verify(token); // 验证Token
             return true;
         } catch (TokenExpiredException e) {
             map.put("state", false);
