@@ -24,7 +24,7 @@ public class Knife4jConfiguration {
                         .version("1.0")
                         .build())
                 //分组名称
-                .groupName("用户服务")
+                .groupName("elm")
                 .select()
                 //这里指定Controller扫描包路径
                 .apis(RequestHandlerSelectors.basePackage("com.elm.controller"))
