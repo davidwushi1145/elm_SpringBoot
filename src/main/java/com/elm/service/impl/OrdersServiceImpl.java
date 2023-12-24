@@ -92,9 +92,10 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<OrdersVo> listOrdersByUserId(String userId) {
+    public List<OrdersVo> listOrdersByUserId(String userId, int page, int size) {
         try {
-            List<Orders> ordersList = ordersMapper.listOrdersByUserId(userId);
+            int offset = (page - 1) * size;
+            List<Orders> ordersList = ordersMapper.listOrdersByUserId(userId, offset, size);
             return getOrdersVo(ordersList);
         } catch (SQLException e) {
             throw new RuntimeException(e);

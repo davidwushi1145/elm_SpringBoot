@@ -34,12 +34,14 @@ public class OrdersController {
     }
 
     @GetMapping("/lists")
-    public BaseResponse<List<OrdersVo>> listOrdersByUserId() {
+    public BaseResponse<List<OrdersVo>> listOrdersByUserId(@RequestParam("page") int page, @RequestParam("size") int size) {
         String userId = userSupport.getCurrentUserId();
         if (userId == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
-        List<OrdersVo> ordersVoList = ordersService.listOrdersByUserId(userId);
+        List<OrdersVo> ordersVoList = ordersService.listOrdersByUserId(userId, page, size);
+        System.out.println(page+"s"+size);
+        System.out.println(ordersVoList.size());
         if (ordersVoList != null) {
             return ResultUtils.success(ordersVoList);
         } else {

@@ -10,7 +10,7 @@ public interface OrdersService {
 
     public OrdersVo getOrdersById(Integer orderId);
 
-    public List<OrdersVo> listOrdersByUserId(String userId);
+    List<OrdersVo> listOrdersByUserId(String userId, int page, int size);
 
     public int updateOrder(Integer orderId, Integer orderState);
 

@@ -19,6 +19,7 @@ public class Knife4jConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         //描述字段支持Markdown语法
+                        .title("elm API")
                         .description("# elm RESTful APIs")
                         .contact("davidlee@foxmail.com")
                         .version("1.0")
